@@ -793,6 +793,7 @@ class SalesService {
       oldSaleData = sales[0];
 
       let timeUpdateQuery = "";
+      let extraFieldsQuery = "";
 
       if (service_status_id === 2 && !oldSaleData.started_at) {
         timeUpdateQuery = ", started_at = NOW()";
@@ -801,30 +802,30 @@ class SalesService {
         timeUpdateQuery = `${startPart}, completed_at = NOW()`;
       } else if (service_status_id === 4) {
         timeUpdateQuery = ", cancelled_at = NOW()";
+
+        extraFieldsQuery = ", payment_status_id = 3";
       }
 
       await connection.query(
-        `UPDATE sales SET service_status_id = ?, updated_by = ?, updated_at = NOW() ${timeUpdateQuery} WHERE id = ?`,
+        `UPDATE sales SET service_status_id = ?, updated_by = ?, updated_at = NOW() 
+       ${timeUpdateQuery} ${extraFieldsQuery} WHERE id = ?`,
         [service_status_id, updated_by, saleId],
       );
 
       await connection.commit();
 
-      // Get the full new state of the sale for auditing
       const [newSaleDataResult] = await connection.query(
         `SELECT * FROM sales WHERE id = ?`,
         [saleId],
       );
-      const newSaleData = newSaleDataResult[0];
 
-      // Audit Log for success
       await auditLogService.log({
         userId: updated_by,
         username: usernameToken,
         actionType: "UPDATE",
         entityType: "sale_service",
         entityId: saleId,
-        changes: { oldValue: oldSaleData, newValue: newSaleData },
+        changes: { oldValue: oldSaleData, newValue: newSaleDataResult[0] },
         ipAddress: ipAddress,
       });
 
@@ -834,7 +835,6 @@ class SalesService {
       };
     } catch (error) {
       if (connection) await connection.rollback();
-      // Audit Log for failure
       await auditLogService.log({
         userId: updated_by,
         username: usernameToken,
