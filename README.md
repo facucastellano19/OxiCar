@@ -1,6 +1,6 @@
-# 🚗 NcDetailing - Sistema de Gestión para Taller de Car Detailing (Backend)
+# 🚗 OxiCar competition - Sistema de Gestión para Taller mecánico (Backend)
 
-> **Solución Real para Negocio en Producción** - Sistema integral desarrollado para la transformación digital de **NcDetailing**, un taller especializado en Car Detailing. Este proyecto, nacido como trabajo final de carrera, soluciona problemáticas reales de gestión y será implementado para el uso diario del cliente.
+> **Solución Real para Negocio en Producción** - Sistema integral desarrollado para la transformación digital de **Oxicar Competition**. Este proyecto soluciona problemáticas reales de gestión y será implementado para el uso diario del cliente.
 
 ![NodeJS](https://img.shields.io/badge/Node.js-20.x-green?style=flat&logo=node.js)
 ![Express](https://img.shields.io/badge/Express-5.x-lightgrey?style=flat&logo=express)
@@ -10,23 +10,13 @@
 
 ## 🎯 Contexto y Objetivo del Proyecto
 
-Este software fue diseñado a medida para **resolver una necesidad de negocio real**: la falta de control centralizado en un taller de Car Detailing en crecimiento.
+Este software fue diseñado a medida para **resolver una necesidad de negocio real**: la falta de control centralizado en un taller mecánico en crecimiento.
 
-Aunque se presenta como **Proyecto Final para la Tecnicatura Superior en Análisis de Sistemas**, su alcance es profesional. El sistema digitaliza procesos específicos del rubro que antes eran manuales, permitiendo al cliente:
-* 📉 **Controlar insumos críticos:** Gestión de stock de productos de limpieza y pulido.
-* 🚗 **Historial vehicular:** Seguimiento detallado de los tratamientos realizados a cada vehículo.
+El sistema digitaliza procesos específicos del rubro que antes eran manuales, permitiendo al cliente:
+* 📉 **Controlar insumos críticos:** Gestión de stock de productos.
+* 🚗 **Historial vehicular:** Seguimiento detallado de los servicios realizados a cada vehículo.
 * 📊 **Toma de decisiones:** Reportes financieros basados en métricas de ventas reales.
-* 🔒 **Seguridad interna:** Auditoría de acciones de los empleados sobre el sistema.
-
-## 👥 Equipo de Desarrollo
-
-Para simular un entorno de trabajo profesional, el desarrollo se dividió en dos áreas especializadas, colaborando mediante metodologías ágiles para asegurar la entrega al cliente:
-
-* **🛠️ Backend, Base de Datos & Infraestructura:** [Facundo Castellano](https://www.linkedin.com/in/facundocastellano/)
-    * *Rol:* Arquitecto de Software y DevOps. Responsable de la lógica de negocio, integridad de datos, seguridad y despliegue.
-* **🎨 Frontend & Experiencia de Usuario (UX):** [Vanina Lamas](https://github.com/vanLam687)
-    * *Rol:* Desarrolladora Frontend. Responsable de traducir los requerimientos del cliente en una interfaz intuitiva y funcional.
-    * 🔗 **[Ver Repositorio Frontend](https://github.com/vanLam687)**
+* 🔒 **Seguridad interna:** Auditoría de acciones sobre el sistema.
 
 ---
 
@@ -46,8 +36,8 @@ El backend fue construido priorizando la **estabilidad y escalabilidad**, dado q
 ### Soluciones Implementadas
 1.  **Gestión Híbrida de Ventas:** El sistema implementa una lógica de negocio bifurcada para adaptarse a la realidad del taller:
     * **Productos:** Control de inventario transaccional con descuento de stock en tiempo real y validación estricta de disponibilidad antes de confirmar la venta.
-    * **Servicios de Detailing:** Flujo de trabajo vinculado obligatoriamente a **vehículos** para generar un historial clínico por patente. Incluye un ciclo de vida operativo propio (*Pendiente, En Proceso, Completado*) independiente del estado de pago.
-2.  **Auditoría Completa (Audit Log):** Sistema de trazabilidad que registra **quién, cuándo y qué** modificó en el sistema (guardando el estado anterior y nuevo en JSON), requisito clave del cliente para el control interno.
+    * **Servicios:** Flujo de trabajo vinculado obligatoriamente a **vehículos** para generar un historial clínico por patente. Incluye un ciclo de vida operativo propio (*Pendiente, En Proceso, Completado*) independiente del estado de pago.
+2.  **Auditoría Completa (Audit Log):** Sistema de trazabilidad que registra **quién, cuándo y qué** modificó en el sistema, requisito clave del cliente para el control interno.
 3.  **Soft Deletes:** Implementación de borrado lógico para asegurar que no se pierda historial de ventas o clientes, vital para los reportes financieros.
 4.  **Seguridad RBAC:** Control de acceso basado en roles para restringir funciones sensibles (como ajustes de stock o métricas financieras) solo al administrador.
 5.  **Inteligencia de Negocio:** Stored Procedures optimizados en base de datos para generar reportes de ingresos y rendimiento en tiempo real sin saturar el servidor.
@@ -62,8 +52,8 @@ El proyecto está contenerizado para facilitar su puesta en marcha en el servido
 
 ```bash
 # 1. Clonar el repositorio
-git clone [https://github.com/facucastellano19/NcDetailing.git](https://github.com/facucastellano19/NcDetailing.git)
-cd NcDetailing
+git clone [https://github.com/facucastellano19/OxiCar.git](https://github.com/facucastellano19/OxiCar.git)
+cd OxiCar
 
 # 2. Levantar servicios
 docker-compose up --build
@@ -90,7 +80,7 @@ La API estará disponible en: `http://localhost:3000`
     DB_HOST=localhost
     DB_USER=root
     DB_PASSWORD=tu_password
-    DB_DATABASE=ncdetailing
+    DB_DATABASE=OxiCar
     JWT_SECRET=tu_secreto_super_seguro
     ```
 
@@ -118,7 +108,7 @@ El diseño de la base de datos relacional soporta la operación diaria del negoc
 
   * **Usuarios y Seguridad:** Roles y permisos.
   * **Operativa:** Clientes y Vehículos.
-  * **Catálogo:** Productos, Servicios de Detailing y Categorías.
+  * **Catálogo:** Productos, Servicios y Categorías.
   * **Facturación:** Ventas, Detalles de Venta y Métodos de Pago.
   * **Control:** Logs de Auditoría.
 
