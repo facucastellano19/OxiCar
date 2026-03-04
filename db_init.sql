@@ -228,6 +228,15 @@ CREATE TABLE sales (
     updated_by INT NULL,
     deleted_by INT NULL,
 
+    -- Service Timestamps 
+    started_at DATETIME NULL,
+    completed_at DATETIME NULL,
+    cancelled_at DATETIME NULL,
+    
+    -- Payment Timestamps 
+    paid_at DATETIME NULL,
+    payment_cancelled_at DATETIME NULL,  
+
     FOREIGN KEY (client_id) REFERENCES clients(id),
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(id),
     FOREIGN KEY (sale_type_id) REFERENCES sale_types(id),

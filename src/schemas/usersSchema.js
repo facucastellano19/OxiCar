@@ -2,27 +2,17 @@ const Joi = require('joi');
 
 const loginSchema = Joi.object({
     username: Joi.string()
-        .alphanum()
-        .min(3)
-        .max(30)
         .required()
         .messages({
-            'string.alphanum': 'Username must be alphanumeric',
-            'string.min': 'Username must be at least 3 characters long',
-            'string.max': 'Username must be at most 30 characters long',
-            'any.required': 'Username is required'
+            'any.required': 'Username is required',
+            'string.empty': 'Username cannot be empty'
         }),
 
     password: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*()_+{}\\[\\]:;<>,.?~\\\\/-]+$'))
-        .min(8)
-        .max(30)
         .required()
         .messages({
-            'string.pattern.base': 'Password must be alphanumeric and can include special characters',
-            'string.min': 'Password must be at least 8 characters long',
-            'string.max': 'Password must be at most 30 characters long',
-            'any.required': 'Password is required'
+            'any.required': 'Password is required',
+            'string.empty': 'Password cannot be empty'
         }),
 });
 
